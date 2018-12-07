@@ -1,0 +1,72 @@
+#code#
+#1 API para trabajar con los geojson del ruteo en México
+#2 Definimos id de cada Estado
+print "A CONTINUACION SE MUESTRAN EL ID DE CADA ESTADO:"
+
+print "Cd. de Mexico = 16397"
+print "Queretaro = 23076"
+print "Nuevo Leon = 21725"
+print "Durango = 19626"
+print "Chihuahua = 19326"
+print "Chiapas = 15309"
+print "Campeche = 17247"
+print "Hidalgo = 4577"
+print "Quintana Roo = 18086"
+print "Michoacan = 26416"
+print "Oaxaca = 14085"
+print "Tabasco = 12450"
+print "Aguascalientes = 2808"
+print "Baja Cafifornia = 24093"
+print "Baja Cafifornia Sur = 24368"
+print "Coahuila = 20673"
+print "Colima = 26975"
+print "Guerrero = 1437"
+print "Hidalgo = 4577"
+print "Jalisco = 27787"
+print "Edo. México = 2079"
+print "Morelos = 1441"
+print "Nayarit = 27016"
+print "Puebla = 6735"
+print "San Luis Potosi = 28832"
+print "Sonora = 44130"
+print "Tamaulipas = 23319"
+print "Tlaxcala = 23842"
+print "Veracruz = 8894"
+print "Yucatán = 18591"
+print "Zacatecas = 20361"
+print "Sinaloa = 9393"
+
+#3 creamos el buscador por ID; pedimos ID del origen e id del destino
+#se agregan al url
+idi = int(raw_input("ID Origen: "))
+idf = int(raw_input("ID Destino: "))
+tok = str(raw_input("Token: "))
+url ="http://gaia.inegi.org.mx/sakbe/wservice?make=CR&dest_i="
+url += str(idi) + "&dest_f=" + str(idf) + "&p=1&v=1&e=2&type=json&key=" + str(tok) 
+url
+
+#4 módulo para poder abrir el url en python
+import urllib2 
+f= urllib2.urlopen(url) #abrimos el url 
+w= f.read()#leer el contenido del url
+
+import json 
+r = json.loads(w)
+j = r[0]["geojson"]
+
+#5 mapa de México en folium
+import folium
+mex = folium.Map(location=[22, -99], 
+                   zoom_start=5)
+                   
+     
+#6 convertimos la cadena a un objeto diccionario en formato json
+import json
+d = json.loads(j)
+
+#7 ya en formato json podemos leerlo y agregarlo el mapa que se creo anteriormente 
+folium.GeoJson((d),name= "rutas").add_to(mex) 
+folium.LayerControl().add_to(mex) #se dio el nombre de rutas para aplicar el layer con nombre.
+
+#8 imprimimos el mapa
+mex 
