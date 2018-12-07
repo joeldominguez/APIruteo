@@ -116,3 +116,6 @@ Referencias:
 [https://stackoverflow.com/questions/4528099/convert-string-to-json-using-python](https://stackoverflow.com/questions/4528099/convert-string-to-json-using-python)
 
 [https://ocefpaf.github.io/python4oceanographers/blog/2015/12/14/geopandas\_folium/](https://ocefpaf.github.io/python4oceanographers/blog/2015/12/14/geopandas_folium/)
+
+##POSTER##
+https://github.com/joeldominguez/APIruteo/blob/master/poster2.pub
